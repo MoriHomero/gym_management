@@ -86,7 +86,11 @@ WSGI_APPLICATION = 'gym_management.wsgi.application'
 # 'NAME': BASE_DIR / 'db.sqlite3',
 
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://postgres:postgres@localhost:5432/mysite')
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost/postgres',
+        conn_max_age=600
+    )
 }
 
 
