@@ -1,0 +1,31 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Informe de Método de Pago{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Informe de Método de Pago</h2>
+  <!-- Botón para navegar a ingresos mensuales -->
+  <div class="mb-3">
+    <a href="{% url 'ingresos_mensuales' %}" class="btn btn-info">Ver Ingresos Mensuales</a>
+  </div>
+  <table class="table table-striped" style="background-color: #f8f9fa;">
+    <thead>
+      <tr>
+        <th>Mes</th>
+        <th>Efectivo</th>
+        <th>Transferencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mes, datos in informe.items %}
+      <tr>
+        <td>{{ mes }}</td>
+        <td>{{ datos.Efectivo }}</td>
+        <td>{{ datos.Transferencia }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

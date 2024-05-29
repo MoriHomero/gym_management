@@ -1,0 +1,33 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Ingresos Mensuales{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Ingresos Mensuales</h2>
+  <!-- Botón para navegar al informe de métodos de pago -->
+  <div class="mb-3">
+    <a href="{% url 'informe_metodo_pago' %}" class="btn btn-info">Ver Informe de Métodos de Pago</a>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped" style="background-color: #f8f9fa;">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Ingresos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingreso in ingresos %}
+          <tr>
+            <td>{{ ingreso.mes|date:"F Y" }}</td>
+            <td>{{ ingreso.ingresos }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

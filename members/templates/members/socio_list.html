@@ -1,0 +1,75 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Lista de Socios{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Socios</h2>
+  <table class="table table-striped" style="background-color: #f8f9fa;"> <!-- Cambio de color de fondo -->
+    <thead>
+      <tr style="border: 2px solid #dee2e6;">
+        <th style="border: 2px solid #dee2e6;">ID</th> <!-- Nueva columna para el ID -->
+        <th style="border: 2px solid #dee2e6;">Nombre y apellido</th>
+        <th style="border: 2px solid #dee2e6;">Correo Electrónico</th>
+        <th style="border: 2px solid #dee2e6;">Teléfono</th>
+        <th style="border: 2px solid #dee2e6;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for socio in page_obj %}
+        <tr style="border: 2px solid #dee2e6;">
+          <td style="border: 2px solid #dee2e6;">{{ socio.pk }}</td> <!-- Muestra el ID del socio -->
+          <td style="border: 2px solid #dee2e6;">{{ socio.nombre }}</td>
+          <td style="border: 2px solid #dee2e6;">{{ socio.email }}</td>
+          <td style="border: 2px solid #dee2e6;">{{ socio.telefono }}</td>
+          <td style="border: 2px solid #dee2e6;">
+            <a href="{% url 'socio_detail' pk=socio.pk %}" class="btn btn-info btn-sm">Ver Detalles</a>
+            <a href="{% url 'socio_edit' pk=socio.pk %}" class="btn btn-secondary btn-sm">Editar</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}&order_by={{ order_by }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}&order_by={{ order_by }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}&order_by={{ order_by }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <div style="margin-bottom: 20px;"></div> <!-- Espacio adicional -->
+  <div class="d-flex justify-content-between mb-3">
+    <!-- Botón "Nuevo Socio" -->
+    <a href="{% url 'socio_new' %}" class="btn btn-info">Nuevo Socio</a>
+    
+    <!-- Formulario de búsqueda -->
+    <form method="GET" class="form-inline">
+      <div class="input-group input-group-sm">
+        <input type="text" name="q" class="form-control" placeholder="Filtrar por nombre" aria-label="Buscar" value="{% if query %}{{ query }}{% endif %}">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-secondary">Buscar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

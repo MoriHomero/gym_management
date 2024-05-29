@@ -1,0 +1,72 @@
+<!-- members/templates/members/socio_edit.html -->
+
+{% extends 'members/base_generic.html' %}
+
+{% block title %}{{ form.instance.pk|yesno:"Editar Socio,Nuevo Socio" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ form.instance.pk|yesno:"Editar Socio,Nuevo Socio" }}</h2>
+    <div class="card mt-4" style="background-color: #e6e1e1;">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Nombre:</strong></h6>
+                            {{ form.nombre }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Correo Electrónico:</strong></h6>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Teléfono:</strong></h6>
+                            {{ form.telefono }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Primer Fecha de Pago A-M-D:</strong></h6>
+                            {{ form.primer_fecha_pago }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h6><strong>Comentarios:</strong></h6>
+                            {{ form.comentarios }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                        <a href="{% url 'socio_list' %}" class="btn btn-secondary mt-2">Volver a la lista</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilo para el campo de comentarios */
+    textarea[name="comentarios"] {
+        height: 100px; /* Establece la altura fija del campo */
+        resize: none; /* Evita que el campo se pueda redimensionar con el mouse */
+    }
+</style>
+
+{% endblock %}

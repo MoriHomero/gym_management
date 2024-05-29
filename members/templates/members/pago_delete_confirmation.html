@@ -1,0 +1,30 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}
+    Confirmar Eliminación
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card" style="background: #e6e1e1;">
+        <div class="card-body">
+            <h1 class="card-title">Confirmar Eliminación</h1>
+            <p class="card-text">¿Estás seguro de que deseas eliminar el siguiente pago?</p>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>ID de Pago:</strong> {{ pago.pk }}</li>
+                <li class="list-group-item"><strong>Nombre y Apellido:</strong> {{ pago.socio.nombre }}</li>
+                <li class="list-group-item"><strong>Fecha de Pago:</strong> {{ pago.fecha_pago }}</li>
+                <li class="list-group-item"><strong>Monto:</strong> {{ pago.monto }}</li>
+                <li class="list-group-item"><strong>Comentarios:</strong> {{ pago.comentarios }}</li>
+            </ul>
+            <form action="{% url 'pago_delete' pk=pago.pk %}" method="post">
+                {% csrf_token %}
+                <div class="btn-group mt-3" role="group">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a href="{% url 'pago_list' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

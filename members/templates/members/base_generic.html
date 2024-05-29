@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GCG{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos predeterminados de la página */
+        html, body {
+            height: 100%;
+            background-color: #f8f9fa; /* Fondo gris claro */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            color: #343a40; /* Color del texto oscuro */
+        }
+        main {
+            flex: 1;
+            background: #dfdcdc; /* Fondo gris para el contenido principal */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        /* Estilos de navegación */
+        .navbar {
+            background-color: #6c757d; /* Fondo azul opaco para la barra de navegación */
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #ffffff !important; /* Color blanco para los enlaces */
+            text-transform: uppercase; /* Texto en mayúsculas */
+        }
+        .navbar-nav .nav-link:hover {
+            color: #dee2e6 !important; /* Color gris claro al pasar el cursor sobre los enlaces */
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        /* footer */
+        .footer {
+            background-color: #6c757d; /* Color de fondo del footer opaco */
+            color: #ffffff; /* Color del texto del footer */
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="{% url 'socio_list' %}">GCG</a> <!-- Lista de Socios -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'socio_list' %}">Lista de Socios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pago_list' %}">Cuotas</a> <!-- Cuotas -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ingresos_mensuales' %}">Resumen de Ingresos</a> <!-- Resumen de Ingresos -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pagos_atrasados' %}">Cuotas Vencidas</a> <!-- Cuotas Vencidas -->
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p> ---- </p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

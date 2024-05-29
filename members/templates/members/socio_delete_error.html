@@ -1,0 +1,16 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}
+  Error al eliminar socio
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Error al eliminar socio</h4>
+      <p>No se puede eliminar este socio porque tiene pagos asociados. Por favor, asegúrate de eliminar los pagos asociados antes de proceder con la eliminación del socio.</p>
+      <hr>
+      <p class="mb-0">Si necesitas más ayuda, por favor contacta al administrador del sistema.</p>
+    </div>
+  </div>
+{% endblock %}

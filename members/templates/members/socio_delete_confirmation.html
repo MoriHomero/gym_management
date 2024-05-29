@@ -1,0 +1,23 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}
+    Confirmar Eliminación de Socio
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card" style="background: #e6e1e1;">
+        <div class="card-body">
+            <h1 class="card-title">Confirmar Eliminación</h1>
+            <p class="card-text">¿Estás seguro de que deseas eliminar al socio "{{ socio.nombre }}"?</p>
+            <form action="{% url 'socio_delete' pk=socio.pk %}" method="post">
+                {% csrf_token %}
+                <div class="btn-group mt-3" role="group">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a href="{% url 'socio_list' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

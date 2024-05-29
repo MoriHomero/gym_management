@@ -1,0 +1,71 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Editar Pago{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ form.instance.pk|yesno:"Editar Pago,Nuevo Pago" }}</h2>
+    <div class="card mt-4 border-0" style="background-color: #e6e1e1; font-family: Arial, sans-serif;">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Socio:</strong></h6>
+                            {{ form.socio }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Fecha de Pago:</strong></h6>
+                            {{ form.fecha_pago }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Monto:</strong></h6>
+                            {{ form.monto }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h6><strong>Pagado:</strong></h6>
+                            {{ form.pagado }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h6><strong>Forma de Pago:</strong></h6>
+                            {{ form.comentarios }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                        <a href="{% url 'pago_list' %}" class="btn btn-secondary mt-2">Volver a la lista</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    #id_comentarios {
+        resize: none;
+        height: auto;
+    }
+    /* Establece la mitad del ancho original para todos los campos de entrada */
+    input[type="text"], input[type="number"], select {
+        width: 50%;
+        height: 30px; /* Establece una altura más baja */
+    }
+</style>
+{% endblock %}

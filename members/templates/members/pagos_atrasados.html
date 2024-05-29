@@ -1,0 +1,50 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Pagos Atrasados{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Pagos Atrasados</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="background-color: #ffe6e6;"> <!-- Cambio de color de fondo -->
+            <thead>
+                <tr>
+                    <th>ID Cliente</th> <!-- Nueva columna -->
+                    <th>ID Pago</th> <!-- Nueva columna -->
+                    <th>Nombre del Socio</th>
+                    <th>Fecha de Pago</th>
+                    <th>Monto</th>
+                    <th>Acciones</th> <!-- Nueva columna para el botón Saldar -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for pago in pagos_atrasados %}
+                <tr>
+                    <td>{{ pago.socio.id }}</td> <!-- Mostrar el ID del socio -->
+                    <td>{{ pago.pk }}</td> <!-- Mostrar el ID del pago -->
+                    <td>{{ pago.socio.nombre }}</td>
+                    <td>{{ pago.fecha_pago }}</td>
+                    <td>{{ pago.monto }}</td>
+                    <td>
+                        <a href="{% url 'pago_edit' pk=pago.pk %}" class="btn btn-info btn-sm">Modificar</a> <!-- Botón para editar el pago -->
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Formulario de búsqueda -->
+    <div class="d-flex justify-content-between mb-3">
+        <form method="GET" class="form-inline">
+            <div class="input-group input-group-sm mr-2">
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Buscar por nombre" value="{% if nombre_query %}{{ nombre_query }}{% else %}{% endif %}">
+            </div>
+            <div class="input-group input-group-sm mr-2">
+                <input type="number" id="mes" name="mes" class="form-control" placeholder="Buscar por mes (1-12)" value="{{ mes_query }}">
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm">Buscar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

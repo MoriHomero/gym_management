@@ -1,0 +1,41 @@
+{% extends 'members/base_generic.html' %}
+
+{% block title %}Verificar Estado de Entrada{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Verificar Estado de Entrada</h2>
+    <form id="verificarForm">
+        <div class="form-group">
+            <label for="id_socio">ID de Socio:</label>
+            <input type="text" class="form-control" id="id_socio" name="id_socio" placeholder="Ingrese el ID del Socio">
+        </div>
+        <button type="button" class="btn btn-primary" id="verificarBtn">Verificar Estado</button>
+    </form>
+    <div id="resultado"></div>
+</div>
+
+<script>
+    // Cuando se hace clic en el botón "Verificar Estado"
+    $('#verificarBtn').click(function() {
+        var id_socio = $('#id_socio').val();
+        $.ajax({
+            url: "{% url 'verificar_estado_entrada' %}",
+            data: {
+                'id_socio': id_socio
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.estado_entrada === true) {
+                    $('#resultado').html('<div class="alert alert-success" role="alert">El socio puede entrar.</div>');
+                } else {
+                    $('#resultado').html('<div class="alert alert-danger" role="alert">El socio no puede entrar.</div>');
+                }
+            },
+            error: function() {
+                $('#resultado').html('<div class="alert alert-danger" role="alert">Hubo un error al verificar el estado.</div>');
+            }
+        });
+    });
+</script>
+{% endblock %}
